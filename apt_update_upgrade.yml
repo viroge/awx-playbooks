@@ -1,0 +1,16 @@
+---
+- name: Automatic apt update for Linux VMs
+  hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Update apt package cache (apt update)
+      ansible.builtin.apt:
+        update_cache: yes
+      changed_when: false
+
+    - name: Upgrade installed packages (apt upgrade)
+      ansible.builtin.apt:
+        upgrade: dist
+        autoremove: yes
